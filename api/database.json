@@ -1,0 +1,190 @@
+
+{
+"governors":[
+   {
+    "id": 1,
+    "name": "Julius Mikkelson",
+    "status": true,
+    "colonyId": 3
+   },
+   {
+    "id": 2,
+    "name": "Elena Torres",
+    "status": true,
+    "colonyId": 5
+   },
+  {
+    "id": 3,
+    "name": "Marcus Nguyen",
+    "status": true,
+    "colonyId": 1
+  },
+  {
+    "id": 4,
+    "name": "Aisha Bennett",
+    "status": true,
+    "colonyId": 4
+  },
+  {
+    "id": 5,
+    "name": "Leo Chambers",
+    "status": true,
+    "colonyId": 2
+  }  
+],
+"colonies": [
+  {
+    "id": 1,
+    "name": "Europa"
+  },
+  {
+    "id": 2,
+    "name": "Zephira"
+  },
+  {
+    "id": 3,
+    "name": "Orion"
+  },
+  {   
+    "id": 4,
+    "name": "Lyra"
+  },
+  {
+    "id": 5,
+    "name": "Nova"
+  }
+],
+"facilities":[
+  { 
+    "id": 1,
+    "name": "Mineral Ridge",
+    "status": true
+  },
+  {
+    "id": 2,
+    "name": "Ironclad Basin",
+    "status": true
+  },
+  {
+    "id": 3,
+    "name": "Crystal Hollow",
+    "status": true
+  },
+  {
+    "id": 4,
+    "name": "Copperveil Site",
+    "status": true
+  },
+  {
+    "id": 5,
+    "name": "Obsidian Reach",
+    "status": true
+  }
+],
+"minerals": [
+  {   
+    "id": 1,
+    "name": "Magnesium"
+  },
+  {
+    "id": 2,
+    "name": "Cobalt"
+  },
+  {
+    "id": 3,
+    "name": "Zinc"
+  },
+  {
+    "id": 4,
+    "name": "Nickel"
+  },
+  {
+    "id": 5,
+    "name": "Lithium"
+  },
+  {
+    "id": 6,
+    "name": "Titanium"
+  },
+  {
+    "id": 7,
+    "name": "Barium"
+  },
+  {
+    "id": 8,
+    "name": "Tungsten"
+  },
+  {
+    "id": 9,
+    "name": "Platinum"
+  },
+  {  
+    "id": 10,
+    "name": "Chromium"
+  }
+],
+"colonyMinerals":[
+  {   
+    "id": 1,
+    "colonyId": 5,
+    "mineralId": 4,
+    "quantity": 2
+  },
+  {
+    "id": 2,
+    "colonyId": 4,
+    "mineralId": 2,
+    "quantity": 5
+  },
+  {
+    "id": 3,
+    "colonyId": 2,
+    "mineralId": 1,
+    "quantity": 3
+  },
+  {
+    "id": 4,
+    "colonyId": 3,
+    "mineralId": 5,
+    "quantity": 7
+  },
+  {
+    "id": 5,
+    "colonyId": 1,
+    "mineralId": 3,
+    "quantity": 4
+  }
+],
+"facilityMinerals": [
+  { 
+    "id": 1,
+    "facilityId": 3,
+    "mineralId": 4,
+    "quantity": 95
+  },
+  {
+    "id": 2,
+    "facilityId": 2,
+    "mineralId": 1,
+    "quantity": 120
+  },
+  {
+    "id": 3,
+    "facilityId": 1,
+    "mineralId": 3,
+    "quantity": 60
+  },
+  {
+    "id": 4,
+    "facilityId": 4,
+    "mineralId": 2,
+    "quantity": 150
+  },
+  {
+    "id": 5,
+    "facilityId": 5,
+    "mineralId": 5,
+    "quantity": 80
+  }
+]
+}
