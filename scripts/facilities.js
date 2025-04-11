@@ -1,4 +1,4 @@
-import { setFacilityId } from "./transientState.js"
+import { setFacility } from "./TransientState.js"
 
 const handleFacilityChoice = (changeEvent) => {
     if (changeEvent.target.id === "facility") {
@@ -14,7 +14,7 @@ export const displayFacilities = async () => {
     const facilities = await response.json()
     const selectedGovernorId = document.querySelector("#governor").value;
 
-    if (selectedGovernorId === "0") {
+    if (selectedGovernorId === "none") {
       alert("Please make sure to select a governor");
       return;
     }
