@@ -8,7 +8,7 @@ const handleFacilityChoice = (changeEvent) => {
             }
          }
 
-export const displayFacilities = async () => {
+export const displayFacility = async () => {
     document.addEventListener("change", handleFacilityChoice)
     const response = await fetch("http://localhost:8088/facilities")
     const facilities = await response.json()
