@@ -1,17 +1,23 @@
 export const MineralChoices = async () => {
     const response = await fetch("http://localhost:8088/minerals")
     const minerals = await response.json()
+    const selectedFacilityId = document.querySelector("#facility").value
 
-    let html = `
-        <div class='survey-input' id='mineral'>
+    if (selectedFacilityId === "0") {
+        alert("Please select a facility first.")
+        return
+    }
+
+    let mineralChoiceHTML = `
+        <div id="facilityMinerals" class="facility-minerals">
         `
         
         for (const mineral of minerals) {
             html += `<input type="radio" name="mineral" value="${mineral.id}" /> ${mineral.name} <br />`
         }
         
-        html += `
+        mineralChoiceHTML += `
         </div>`
 
-        return html
+        return mineralChoiceHTML
 }
