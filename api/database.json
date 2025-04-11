@@ -185,6 +185,36 @@
     "facilityId": 5,
     "mineralId": 5,
     "quantity": 80
-  }
+  },
+  {
+    "id": 6,
+    "facilityId": 3,
+    "mineralId": 2,
+    "quantity": 110
+  },
+  {
+    "id": 7,
+    "facilityId": 2,
+    "mineralId": 5,
+    "quantity": 75
+  },
+  {
+    "id": 8,
+    "facilityId": 1,
+    "mineralId": 4,
+    "quantity": 130
+  },
+  {
+    "id": 9,
+    "facilityId": 4,
+    "mineralId": 1,
+    "quantity": 95
+  },
+  {
+    "id": 10,
+    "facilityId": 5,
+    "mineralId": 3,
+    "quantity": 100
+  }  
 ]
 }
