@@ -11,7 +11,7 @@ const transientState = {
     // document.dispatchEvent(new CustomEvent("stateChanged"))
   }
   
-  export const setFacility = (id => {
+  export const setFacility = (id)=> {
     transientState.facilityId = id
     // document.dispatchEvent(new CustomEvent("stateChanged"))
   }
@@ -24,7 +24,7 @@ const transientState = {
   // GETTER
   
 //   export const getTransientState = () => {
-//     return { ...transientState } // safe copy right heeeere
+//     return { ...transientState } // safe copy right here
 //   }
   
   // RESET
@@ -35,7 +35,7 @@ const transientState = {
 //   }
 
 
-//main.js  // example of function that keeps on keepin on injecting with each new update
+//main.js  // example of function that keeps on injecting with each new update
 //   const renderApp = async () => {
 //     document.querySelector("#mineralsForm").innerHTML = FacilityMinerals()
 //   }

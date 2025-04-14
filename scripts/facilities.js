@@ -18,10 +18,8 @@ export const displayFacility = async () => {
 
     const divStringArray = facilities.map((facility) => {
         if (facility.status === true) {
-          facilityChoiceHTML += `<option 
-                                    value="${facility.id}
-                                    ">${facility.name}
-                                </option>`
+            facilityChoiceHTML += `<option value="${facility.id}">${facility.name}</option>`
+
                 
 }})
     facilityChoiceHTML += divStringArray.join("")    
@@ -29,5 +27,3 @@ export const displayFacility = async () => {
 
     return facilityChoiceHTML
 }
-
-//a small change

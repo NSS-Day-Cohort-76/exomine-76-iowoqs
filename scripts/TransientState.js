@@ -59,7 +59,7 @@ export const purchaseMineral = () => {
   // GETTER
   
 //   export const getTransientState = () => {
-//     return { ...transientState } // safe copy right heeeere
+//     return { ...transientState } // safe copy right here
 //   }
   
   // RESET
