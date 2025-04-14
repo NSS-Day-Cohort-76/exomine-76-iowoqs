@@ -1,25 +1,25 @@
-const transientState = {
-    governorId: 0,
-    facilityId: 0,
-    mineralId: 0
-  }
+// const transientState = {
+//     governorId: 0,
+//     facilityId: 0,
+//     mineralId: 0
+//   }
   
-  // SETTERS
+//   // SETTERS
   
-  export const setGovernor = (id) => {
-    transientState.governorId = id
+//   export const setGovernor = (id) => {
+//     transientState.governorId = id
+//     // document.dispatchEvent(new CustomEvent("stateChanged"))
+//   }
+  
+//   export const setFacility = (id) => {
+//     transientState.facilityId = id
+//     // document.dispatchEvent(new CustomEvent("stateChanged"))
+//   }
+  
+//   export const setMineral = (id) => {
+//     transientState.mineralId = id
     // document.dispatchEvent(new CustomEvent("stateChanged"))
-  }
-  
-  export const setFacility = (id) => {
-    transientState.facilityId = id
-    // document.dispatchEvent(new CustomEvent("stateChanged"))
-  }
-  
-  export const setMineral = (id) => {
-    transientState.mineralId = id
-    // document.dispatchEvent(new CustomEvent("stateChanged"))
-  }
+  // }
 
   // GETTER
   
