@@ -30,4 +30,20 @@ export const displayFacility = async () => {
     return facilityChoiceHTML
 }
 
-//a small change
+
+export const facilitiesEventListener = () => {
+    document.addEventListener("change", (changeEvt) => {
+        if (changeEvt.target.id === "facility") {
+            document.dispatchEvent(new CustomEvent ("facilitySelected"))
+        }
+    })
+}
+
+
+export const facilitiesEventListener = () => {
+    document.addEventListener("change", (changeEvt) => {
+        if (changeEvt.target.id === "facility") {
+            document.dispatchEvent(new CustomEvent ("facilitySelected"))
+        }
+    })
+}

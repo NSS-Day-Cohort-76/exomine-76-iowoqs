@@ -1,7 +1,6 @@
-import { displayGovernors } from "./governors.js";
-import { displayColonyInventory } from "./colonyInventory.js";
-import { governorsEventListener } from "./governors.js";
-import { displayFacility } from "./facilities.js";
+import { mainHTML } from "./Exomine.js"
+import { governorsEventListener } from "./governors.js"
+import { facilitiesEventListener } from "./facilities.js"
 
 const container = document.querySelector("#container")
 
@@ -11,6 +10,7 @@ const render = async () => {
     const facilityChoiceHTML = await displayFacility()
     container.innerHTML = governorsHTML + colonyInventoryHTML + facilityChoiceHTML
     governorsEventListener()
+    facilitiesEventListener()
 }
 
 render()
