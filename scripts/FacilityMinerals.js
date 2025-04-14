@@ -31,10 +31,12 @@ export const MineralChoices = async () => {
     return mineralChoiceHTML
 }
 
-document.querySelector("#facility").addEventListener("change", async () => {
-    const mineralHTML = await MineralChoices()
-    document.querySelector("#facilityMinerals").innerHTML = mineralHTML
-})
+
+
+// document.querySelector("#facility").addEventListener("change", async () => {
+//     const mineralHTML = await MineralChoices()
+//     document.querySelector("#mineralsForm").innerHTML = mineralHTML
+// })
 
 document.addEventListener("change", (event) => {
     // Only run if a mineral radio button was selected
@@ -58,13 +60,13 @@ document.addEventListener("change", (event) => {
     }
 })
 
-document.querySelector("#purchaseBtn").addEventListener("click", () => {
-    // Reset cart message
-    document.querySelector("#cartDetails").innerHTML = `<p>No mineral selected</p>`
+// document.querySelector("#purchaseBtn").addEventListener("click", () => {
+//     // Reset cart message
+//     document.querySelector("#cartDetails").innerHTML = `<p>No mineral selected</p>`
 
-    // Uncheck all radio buttons
-    const checkedRadio = document.querySelector('input[name="mineral"]:checked')
-    if (checkedRadio) {
-        checkedRadio.checked = false
-    }
-})
+//     // Uncheck all radio buttons
+//     const checkedRadio = document.querySelector('input[name="mineral"]:checked')
+//     if (checkedRadio) {
+//         checkedRadio.checked = false
+//     }
+// })

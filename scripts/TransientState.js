@@ -1,4 +1,5 @@
 const state = {
+    selectedFacility: 0
 
 }
 
