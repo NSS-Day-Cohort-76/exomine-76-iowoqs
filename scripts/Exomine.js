@@ -1,6 +1,5 @@
 import { displayGovernors } from "./governors.js";
 import { displayColonyInventory } from "./colonyInventory.js";
-
 import { displayFacility } from "./facilities.js";
 import { MineralChoices } from "./FacilityMinerals.js";
 
@@ -10,6 +9,7 @@ export const mainHTML = async () => {
     const governorsDropdownHTML = await displayGovernors()
     const facilityDropdownHTML = await displayFacility()
     const colonyInventoryHTML = await displayColonyInventory()
+    const facilityMineralsHTML = await MineralChoices()
 
     let html = `
     <section class="top-half">
@@ -28,8 +28,9 @@ export const mainHTML = async () => {
 
     <section class="bottom-half">
       <div id="facilityMinerals" class="facility-minerals">
-        <h2>Facility Minerals</h2>
+        <h2 id="facilityMineralHeading">Facility Minerals</h2>
         <form id="mineralsForm">
+        
       </div>
 
       <div id="spaceCart" class="space-cart">
