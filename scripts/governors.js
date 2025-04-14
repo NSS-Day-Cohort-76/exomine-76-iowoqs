@@ -1,5 +1,14 @@
+import { setColony } from "./TransientState.js"
+
+const handleChange = (changeEvent) => {
+    if (changeEvent.target.id === "governors") {
+        const chosenOption = parseInt(changeEvent.target.value)
+        setColony(chosenOption)
+        }
+    }
 
 export const displayGovernors = async () => {
+    document.addEventListener("change", handleChange)
     const governors = await fetch("http://localhost:8088/governors").then(res => res.json())
 
     let html = `<select id="governors" class="dropdown">

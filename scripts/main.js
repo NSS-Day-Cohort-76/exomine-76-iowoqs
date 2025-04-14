@@ -11,3 +11,4 @@ const render = async () => {
 }
 
 render()
+

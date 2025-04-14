@@ -1,76 +1,75 @@
 
-const transientState = {
-    selectedGovernorId: null,
-    selectedFacilityId: null,
-    selectedMineralId: null,
+const colonyState = {
+    colonyId: 0,
+    mineralId: 0,
+    quantity: 0
 }
 
-// Setters
+const facilityState = {
+    facilityId: 0,
+    mineralId: 0,
+    quantity: 0
+}
 
-export const setGovernor = (id) => transientState.selectedGovernorId = id
-export const setFacility = (id) => transientState.selectedFacilityId = id
-export const setMineral = (id) => transientState.selectedMineralId = id
+export const setFacility = (facilityId) => {
+    facilityState.facilityId = facilityId
 
-// Getters
-export const getTransientState = () => ({ ...transientState })
+}
 
+export const setColony = (colonyId) => {
+    colonyState.colonyId = colonyId
+}
 
+export const setMineral = (mineralId) => {
+    colonyState.mineralId = mineralId
+    facilityState.mineralId = mineralId
+}
 
 export const purchaseMineral = async () => {
-    const { selectedGovernorId, selectedFacilityId, selectedMineralId } = getTransientState()
+    // Get colonyMineral if it exists
+    const colonyRes = await fetch(`http://localhost:8088/colonyMinerals?mineralId=${colonyState.mineralId}&colonyId=${colonyState.colonyId}`)
+    const colonyMineralArray = await colonyRes.json()
+    
+    let colonyMineral
+    if (colonyMineralArray.length === 0) {
+        // New entry
+        colonyMineral = {
+            colonyId: colonyState.colonyId,
+            mineralId: colonyState.mineralId,
+            quantity: 1
+        }
 
-    if (!selectedGovernorId || !selectedFacilityId || !selectedMineralId) {
-        alert("Please select a governor, facility, and mineral.")
-        return
-    }
-
-    // Get the colonyId from the selected governor
-    const governorRes = await fetch(`http://localhost:8088/governors/${selectedGovernorId}?_expand=colony`)
-    const governor = await governorRes.json()
-    const colonyId = governor.colonyId
-
-    // Get the facilityMineral record
-    const facilityMineralsRes = await fetch(`http://localhost:8088/facilityMinerals?facilityId=${selectedFacilityId}&mineralId=${selectedMineralId}`)
-    const facilityMinerals = await facilityMineralsRes.json()
-    const facilityMineralRecord = facilityMinerals[0]
-
-    if (facilityMineralRecord.quantity <= 0) {
-        alert("Not enough minerals at the facility.")
-        return
-    }
-
-    // Update facilityMineral: subtract 1
-    await fetch(`http://localhost:8088/facilityMinerals/${facilityMineralRecord.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ quantity: facilityMineralRecord.quantity - 1 })
-    })
-
-    // Check if the colonyMineral record already exists
-    const colonyMineralsRes = await fetch(`http://localhost:8088/colonyMinerals?colonyId=${colonyId}&mineralId=${selectedMineralId}`)
-    const colonyMinerals = await colonyMineralsRes.json()
-
-    if (colonyMinerals.length > 0) {
-        // It exists, so update it
-        const colonyMineralRecord = colonyMinerals[0]
-        await fetch(`http://localhost:8088/colonyMinerals/${colonyMineralRecord.id}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ quantity: colonyMineralRecord.quantity + 1 })
-        })
-    } else {
-        // It doesn't exist, so create it
-        await fetch(`http://localhost:8088/colonyMinerals`, {
+        await fetch("http://localhost:8088/colonyMinerals", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                colonyId,
-                mineralId: selectedMineralId,
-                quantity: 1
-            })
+            body: JSON.stringify(colonyMineral)
+        })
+    } else {
+        // Update existing
+        colonyMineral = colonyMineralArray[0]
+        colonyMineral.quantity += 1
+
+        await fetch(`http://localhost:8088/colonyMinerals/${colonyMineral.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(colonyMineral)
         })
     }
 
-    // Notify the app that a purchase happened
-    document.dispatchEvent(new CustomEvent("purchaseMade"))
+    //Fetch and update facility mineral
+    const facilityRes = await fetch(`http://localhost:8088/facilityMinerals?mineralId=${facilityState.mineralId}&facilityId=${facilityState.facilityId}`)
+    const facilityMineralArray = await facilityRes.json()
+
+
+    const facilityMineral = facilityMineralArray[0]
+    facilityMineral.quantity -= 1
+
+    await fetch(`http://localhost:8088/facilityMinerals/${facilityMineral.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(facilityMineral)
+    })
+
+
+    document.dispatchEvent(new CustomEvent("purchaseSubmitted"))
 }

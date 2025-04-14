@@ -1,3 +1,5 @@
+import { setMineral } from "./TransientState.js"
+
 export const MineralChoices = async () => {
     const [mineralsRes, facilityMineralsRes, facilitiesRes] = await Promise.all([
         fetch("http://localhost:8088/minerals"),
@@ -28,48 +30,32 @@ export const MineralChoices = async () => {
         document.getElementById("facilityMineralHeading").innerHTML = `Facility Minerals for ${facilityObj.name}`
     }
 
-    document.querySelector("#mineralsForm").innerHTML = mineralChoiceHTML
-}
+        document.querySelector("#mineralsForm").innerHTML = mineralChoiceHTML
+    }
 
 
+document.addEventListener("purchaseSubmitted", MineralChoices)
 
-
-
-
-// document.querySelector("#facility").addEventListener("change", async () => {
-//     const mineralHTML = await MineralChoices()
-//     document.querySelector("#facilityMinerals").innerHTML = mineralHTML
-// })
-
-// document.addEventListener("change", (event) => {
-//     // Only run if a mineral radio button was selected
-//     if (event.target.name === "mineral") {
-//         const selectedMineralId = parseInt(event.target.value)
+document.addEventListener("change", (event) => {
+    // Only run if a mineral radio button was selected
+    if (event.target.name === "mineral") {
+        const selectedMineralId = parseInt(event.target.value)
 
 //         // Get the selected facility name
 //         const facilityDropdown = document.querySelector("#facility")
 //         const selectedFacilityName = facilityDropdown.options[facilityDropdown.selectedIndex].text
 
-//         // Get the selected mineral name by looking at the radio button's value
-//         fetch("http://localhost:8088/minerals")
-//             .then(response => response.json())
-//             .then(minerals => {
-//                 const selectedMineral = minerals.find(minerals => minerals.id === selectedMineralId)
+        // Get the selected mineral name by looking at the radio button's value
+        fetch("http://localhost:8088/minerals")
+            .then(response => response.json())
+            .then(minerals => {
+                const selectedMineral = minerals.find(minerals => minerals.id === selectedMineralId)
 
-//                 // Now update the cart with the message
-//                 const cartMessage = `1 ton of ${selectedMineral.name} from ${selectedFacilityName}`
-//                 document.querySelector("#cartDetails").innerHTML = `<p>${cartMessage}</p>`
-//             })
-//     }
-// })
+                // Now update the cart with the message
+                const cartMessage = `1 ton of ${selectedMineral.name} from ${selectedFacilityName}`
+                document.querySelector("#cartDetails").innerHTML = `<p>${cartMessage}</p>`
+                setMineral(selectedMineral.id)
+            })
+    }
+})
 
-// document.querySelector("#purchaseBtn").addEventListener("click", () => {
-//     // Reset cart message
-//     document.querySelector("#cartDetails").innerHTML = `<p>No mineral selected</p>`
-
-//     // Uncheck all radio buttons
-//     const checkedRadio = document.querySelector('input[name="mineral"]:checked')
-//     if (checkedRadio) {
-//         checkedRadio.checked = false
-//     }
-// })

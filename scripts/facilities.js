@@ -1,3 +1,12 @@
+import { setFacility } from "./TransientState.js"
+
+const handleFacilityChoice = (changeEvent) => {
+    if (changeEvent.target.id === "facility") {
+        const chosenOption = parseInt(changeEvent.target.value)
+        setFacility(chosenOption)
+        }
+    }
+
 export const displayFacility = async () => {
     const response = await fetch("http://localhost:8088/facilities")
     const facilities = await response.json()
