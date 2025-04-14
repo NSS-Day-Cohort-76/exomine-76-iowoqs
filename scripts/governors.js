@@ -1,4 +1,3 @@
-import { displayColonyInventory } from "./colonyInventory.js"
 
 export const displayGovernors = async () => {
     const governors = await fetch("http://localhost:8088/governors").then(res => res.json())

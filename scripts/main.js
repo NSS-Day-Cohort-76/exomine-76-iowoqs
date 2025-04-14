@@ -1,18 +1,10 @@
-import { displayGovernors } from "./governors.js";
-import { displayColonyInventory } from "./colonyInventory.js";
-import { governorsEventListener } from "./governors.js";
-import { displayFacility } from "./facilities.js";
+import { mainHTML } from "./Exomine.js"
+import { governorsEventListener } from "./governors.js"
 
-const container = document.querySelector("#container")
-const governorDropdown = document.getElementById("governorDropdown")
-const colonyDropdown = document.getElementById("colonyInventory")
-const facilityDropdown = document.getElementById("facilityDropdown")
+const container = document.getElementById("container")
 
 const render = async () => {
-    const governorsHTML = await displayGovernors()
-    const colonyInventoryHTML = await displayColonyInventory()
-    const facilityChoiceHTML = await displayFacility()
-    container.innerHTML = governorsHTML + colonyInventoryHTML + facilityChoiceHTML
+    container.innerHTML = await mainHTML()
     governorsEventListener()
 }
 
