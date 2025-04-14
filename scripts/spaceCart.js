@@ -1,4 +1,4 @@
-import { purchaseMineral } from "./transientState.js"
+import { purchaseMineral } from "./TransientState.js"
 
 const handlePurchaseSubmission = (clickEvent) => {
     if (clickEvent.target.id === "submission-button") {

@@ -18,20 +18,20 @@ body {
     padding: 2rem;
   }
   
-  .top-row {
+  .top-half {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
     margin-bottom: 2rem;
   }
   
-  .selectors {
+  .dropdowns {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
   
-  .main-display {
+  .bottom-half {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
@@ -50,6 +50,8 @@ body {
   .colony-inventory ul {
     margin-top: 0.5rem;
   }
+
+ 
   
   button#purchaseBtn {
     background-color: deeppink;

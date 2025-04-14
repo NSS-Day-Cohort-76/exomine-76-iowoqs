@@ -11,7 +11,7 @@ const transientState = {
     // document.dispatchEvent(new CustomEvent("stateChanged"))
   }
   
-  export const setFacility = (id)=> {
+  export const setFacility = (id) => {
     transientState.facilityId = id
     // document.dispatchEvent(new CustomEvent("stateChanged"))
   }

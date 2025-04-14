@@ -1,4 +1,4 @@
-import { setFacility } from "./transientState.js"
+import { setFacility } from "./TransientState.js"
 
 const handleFacilityChoice = (changeEvent) => {
     if (changeEvent.target.id === "facility") {
@@ -14,15 +14,13 @@ export const displayFacility = async () => {
     const facilities = await response.json()
    
     let facilityChoiceHTML = `<select id="facility" class="facility-dropdown">
-                    <option value="0">Please select facility</option>`
+        <option value="0">Choose a facility...</option>`
 
-    const divStringArray = facilities.map((facility) => {
-        if (facility.status === true) {
-            facilityChoiceHTML += `<option value="${facility.id}">${facility.name}</option>`
+    const facilityOptions = facilities
+        .filter(facility => facility.status === true)
+        .map(facility => `<option value="${facility.id}">${facility.name}</option>`)
 
-                
-}})
-    facilityChoiceHTML += divStringArray.join("")    
+    facilityChoiceHTML += facilityOptions.join("")
     facilityChoiceHTML += `</select>`
 
     return facilityChoiceHTML
