@@ -37,7 +37,12 @@ body {
     gap: 2rem;
   }
   
-  .facility-minerals,
+  .facility-minerals {
+    background-color: #f2f8f6;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    width: 65%;
+  }
   .space-cart,
   .colony-inventory {
     background-color: #f2f8f6;

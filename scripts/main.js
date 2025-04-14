@@ -1,16 +1,13 @@
 import { mainHTML } from "./Exomine.js"
-import { governorsEventListener } from "./governors.js"
-import { facilitiesEventListener } from "./facilities.js"
+import { setupEventListeners } from "./EventListeners.js"  //  New unified listener module
 
 const container = document.querySelector("#container")
 
 const render = async () => {
-    const governorsHTML = await displayGovernors()
-    const colonyInventoryHTML = await displayColonyInventory()
-    const facilityChoiceHTML = await displayFacility()
-    container.innerHTML = governorsHTML + colonyInventoryHTML + facilityChoiceHTML
-    governorsEventListener()
-    facilitiesEventListener()
+    const html = await mainHTML()     // Use your single-page builder
+    container.innerHTML = html
+
+    setupEventListeners()             // Attach all event listeners
 }
 
 render()

@@ -1,82 +1,75 @@
-
-
 export const MineralChoices = async () => {
-    document.addEventListener("facilitySelected", async () => {
-    const [mineralsRes, facilityMineralsRes, facilities] = await Promise.all([ //Gets both list of all minerals and the facilityMinerals list at the same time.
+    const [mineralsRes, facilityMineralsRes, facilitiesRes] = await Promise.all([
         fetch("http://localhost:8088/minerals"),
         fetch("http://localhost:8088/facilityMinerals"),
         fetch("http://localhost:8088/facilities")
     ])
 
     const minerals = await mineralsRes.json()
-    const facilityMinerals = await facilityMineralsRes.json() // Turns the response into usable data (the two lists)
-    const facilityObjects = await facilities.json()
-    
-        //Reads the selected facility from the dropdown and converts it to a number.
-        const selectedFacilityId = parseInt(document.querySelector("#facility").value) 
+    const facilityMinerals = await facilityMineralsRes.json()
+    const facilities = await facilitiesRes.json()
 
-        // if (selectedFacilityId === 0) {
-        //     alert("Please select a facility first.") //If no facility is selected, alert the user and stop execution.
-        // }
+    const selectedFacilityId = parseInt(document.querySelector("#facility").value)
+    const availableMinerals = facilityMinerals.filter(fm => fm.facilityId === selectedFacilityId)
 
-        // Filter facilityMinerals by selected facility, and gives you only the minerals that match the facility the user selected.
-        const availableMineralsAtFacility = facilityMinerals.filter(
-            facilityMinerals => facilityMinerals.facilityId === selectedFacilityId
-        )
+    let mineralChoiceHTML = `<div id="facilityMinerals" class="facility-minerals">`
 
-        //Loops through the available minerals and creates a radio button for each one.
-        let mineralChoiceHTML = `<div id="facilityMinerals" class="facility-minerals">`
-
-        for (const facilityMinerals of availableMineralsAtFacility) {
-            const mineral = minerals.find(mineral => mineral.id === facilityMinerals.mineralId)
-            mineralChoiceHTML += `<input type="radio" name="mineral" value="${mineral.id}" /> ${facilityMinerals.quantity} tons of ${mineral.name} <br />`
+    for (const fm of availableMinerals) {
+        const mineral = minerals.find(m => m.id === fm.mineralId)
+        if (mineral) {
+            mineralChoiceHTML += `<input type="radio" name="mineral" value="${mineral.id}" /> ${fm.quantity} tons of ${mineral.name} <br />`
         }
+    }
 
-        mineralChoiceHTML += `</div>`
-        
-        //Update Title
-        const facilityObject = facilityObjects.find(obj => obj.id === selectedFacilityId)
-        document.getElementById("facilityMineralHeading").innerHTML = `Facility Minerals for ${facilityObject.name}`
+    mineralChoiceHTML += `</div>`
 
-        document.querySelector("#mineralsForm").innerHTML = mineralChoiceHTML
-    })
+    const facilityObj = facilities.find(f => f.id === selectedFacilityId)
+    if (facilityObj) {
+        document.getElementById("facilityMineralHeading").innerHTML = `Facility Minerals for ${facilityObj.name}`
+    }
 
+    document.querySelector("#mineralsForm").innerHTML = mineralChoiceHTML
 }
 
-document.querySelector("#facility").addEventListener("change", async () => {
-    const mineralHTML = await MineralChoices()
-    document.querySelector("#facilityMinerals").innerHTML = mineralHTML
-})
 
-document.addEventListener("change", (event) => {
-    // Only run if a mineral radio button was selected
-    if (event.target.name === "mineral") {
-        const selectedMineralId = parseInt(event.target.value)
 
-        // Get the selected facility name
-        const facilityDropdown = document.querySelector("#facility")
-        const selectedFacilityName = facilityDropdown.options[facilityDropdown.selectedIndex].text
 
-        // Get the selected mineral name by looking at the radio button's value
-        fetch("http://localhost:8088/minerals")
-            .then(response => response.json())
-            .then(minerals => {
-                const selectedMineral = minerals.find(minerals => minerals.id === selectedMineralId)
 
-                // Now update the cart with the message
-                const cartMessage = `1 ton of ${selectedMineral.name} from ${selectedFacilityName}`
-                document.querySelector("#cartDetails").innerHTML = `<p>${cartMessage}</p>`
-            })
-    }
-})
 
-document.querySelector("#purchaseBtn").addEventListener("click", () => {
-    // Reset cart message
-    document.querySelector("#cartDetails").innerHTML = `<p>No mineral selected</p>`
+// document.querySelector("#facility").addEventListener("change", async () => {
+//     const mineralHTML = await MineralChoices()
+//     document.querySelector("#facilityMinerals").innerHTML = mineralHTML
+// })
 
-    // Uncheck all radio buttons
-    const checkedRadio = document.querySelector('input[name="mineral"]:checked')
-    if (checkedRadio) {
-        checkedRadio.checked = false
-    }
-})
+// document.addEventListener("change", (event) => {
+//     // Only run if a mineral radio button was selected
+//     if (event.target.name === "mineral") {
+//         const selectedMineralId = parseInt(event.target.value)
+
+//         // Get the selected facility name
+//         const facilityDropdown = document.querySelector("#facility")
+//         const selectedFacilityName = facilityDropdown.options[facilityDropdown.selectedIndex].text
+
+//         // Get the selected mineral name by looking at the radio button's value
+//         fetch("http://localhost:8088/minerals")
+//             .then(response => response.json())
+//             .then(minerals => {
+//                 const selectedMineral = minerals.find(minerals => minerals.id === selectedMineralId)
+
+//                 // Now update the cart with the message
+//                 const cartMessage = `1 ton of ${selectedMineral.name} from ${selectedFacilityName}`
+//                 document.querySelector("#cartDetails").innerHTML = `<p>${cartMessage}</p>`
+//             })
+//     }
+// })
+
+// document.querySelector("#purchaseBtn").addEventListener("click", () => {
+//     // Reset cart message
+//     document.querySelector("#cartDetails").innerHTML = `<p>No mineral selected</p>`
+
+//     // Uncheck all radio buttons
+//     const checkedRadio = document.querySelector('input[name="mineral"]:checked')
+//     if (checkedRadio) {
+//         checkedRadio.checked = false
+//     }
+// })
