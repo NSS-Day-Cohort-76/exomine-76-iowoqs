@@ -1,34 +1,46 @@
+
+
 export const MineralChoices = async () => {
-    const [mineralsRes, facilityMineralsRes] = await Promise.all([ //Gets both list of all minerals and the facilityMinerals list at the same time.
+    document.addEventListener("facilitySelected", async () => {
+    const [mineralsRes, facilityMineralsRes, facilities] = await Promise.all([ //Gets both list of all minerals and the facilityMinerals list at the same time.
         fetch("http://localhost:8088/minerals"),
-        fetch("http://localhost:8088/facilityMinerals")
+        fetch("http://localhost:8088/facilityMinerals"),
+        fetch("http://localhost:8088/facilities")
     ])
+
     const minerals = await mineralsRes.json()
     const facilityMinerals = await facilityMineralsRes.json() // Turns the response into usable data (the two lists)
+    const facilityObjects = await facilities.json()
+    
+        //Reads the selected facility from the dropdown and converts it to a number.
+        const selectedFacilityId = parseInt(document.querySelector("#facility").value) 
 
-    //Reads the selected facility from the dropdown and converts it to a number.
-    const selectedFacilityId = parseInt(document.querySelector("#facility").value) 
+        // if (selectedFacilityId === 0) {
+        //     alert("Please select a facility first.") //If no facility is selected, alert the user and stop execution.
+        // }
 
-    if (selectedFacilityId === 0) {
-        alert("Please select a facility first.") //If no facility is selected, alert the user and stop execution.
-        return
-    }
+        // Filter facilityMinerals by selected facility, and gives you only the minerals that match the facility the user selected.
+        const availableMineralsAtFacility = facilityMinerals.filter(
+            facilityMinerals => facilityMinerals.facilityId === selectedFacilityId
+        )
 
-    // Filter facilityMinerals by selected facility, and gives you only the minerals that match the facility the user selected.
-    const availableMineralsAtFacility = facilityMinerals.filter(
-        facilityMinerals => facilityMinerals.facilityId === selectedFacilityId
-    )
+        //Loops through the available minerals and creates a radio button for each one.
+        let mineralChoiceHTML = `<div id="facilityMinerals" class="facility-minerals">`
 
-    //Loops through the available minerals and creates a radio button for each one.
-    let mineralChoiceHTML = `<div id="facilityMinerals" class="facility-minerals">`
+        for (const facilityMinerals of availableMineralsAtFacility) {
+            const mineral = minerals.find(mineral => mineral.id === facilityMinerals.mineralId)
+            mineralChoiceHTML += `<input type="radio" name="mineral" value="${mineral.id}" /> ${facilityMinerals.quantity} tons of ${mineral.name} <br />`
+        }
 
-    for (const facilityMinerals of availableMineralsAtFacility) {
-        const mineral = minerals.find(mineral => mineral.id === facilityMinerals.mineralId)
-        mineralChoiceHTML += `<input type="radio" name="mineral" value="${mineral.id}" /> ${mineral.name} <br />`
-    }
+        mineralChoiceHTML += `</div>`
+        
+        //Update Title
+        const facilityObject = facilityObjects.find(obj => obj.id === selectedFacilityId)
+        document.getElementById("facilityMineralHeading").innerHTML = `Facility Minerals for ${facilityObject.name}`
 
-    mineralChoiceHTML += `</div>`
-    return mineralChoiceHTML
+        document.querySelector("#mineralsForm").innerHTML = mineralChoiceHTML
+    })
+
 }
 
 
