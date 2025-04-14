@@ -4,9 +4,8 @@ const handleFacilityChoice = (changeEvent) => {
     if (changeEvent.target.id === "facility") {
         const chosenOption = parseInt(changeEvent.target.value)
         setFacility(chosenOption)
-        console.log(parseInt(chosenOption))
-            }
-         }
+        }
+    }
 
 export const displayFacility = async () => {
     document.addEventListener("change", handleFacilityChoice)
