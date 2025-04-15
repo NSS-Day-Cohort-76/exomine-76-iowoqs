@@ -1,74 +1,146 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #ffeeee;
-    color: #1e1e1e;
-    margin: 0;
-    padding: 0;
-  }
-  
-  header {
-    background-color: #3b332f;
-    color: #f5de9c;
-    text-align: center;
-    padding: 1rem;
-    font-family: 'Orbitron', sans-serif;
-  }
-  
-  main {
-    padding: 2rem;
-  }
-  
-  .top-half {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .dropdowns {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .bottom-half {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-  
-  .facility-minerals,
-  .space-cart,
-  .colony-inventory {
-    background-color: #f2f8f6;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    width: 100%;
-  }
-  
-  .facility-minerals form,
-  .colony-inventory ul {
-    margin-top: 0.5rem;
-  }
+  font-family: 'Orbitron', sans-serif;
+  background-color: #1b1522; /* deep cosmic purple */
+  color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
 
- 
+.main-header {
+  display: flex;
+  align-items: center;
+  background-color: #251c31;
+  color: #d1d85c; /* lime green from logo */
+  padding: 1.5rem 2rem;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1.5px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.main-header .logo {
+  max-height: 80px;
+  margin-right: 1.5rem;
+}
+
+.main-header .title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+main {
+  padding: 2rem;
+}
+
+.top-half,
+.bottom-half {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dropdowns {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 40%;
+}
+
+select {
+  background-color: #443f59;
+  color: #f2f2f2;
+  border: 1px solid #6b1f38;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+label,
+h2 {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.facility-minerals {
+  background-color: #2e2639;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  width: 85%;
+  /* box-shadow: 2px 2px 6px rgba(0,0,0,0.4); */
+  min-height: 250px;
+}
+
+.space-cart,
+.colony-inventory {
+  background-color: #2e2639;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  min-height: 250px;
+}
+
+.facility-minerals h2,
+.space-cart h2,
+.colony-inventory h2 {
+  background-color: #6b1f38; /* deep maroon */
+  color: #f2f2f2;
+  padding: 0.6rem 1rem;
+  margin: -1rem -1.5rem 1rem;
+  border-radius: 12px 12px 0 0;
+  font-size: 1.1rem;
+}
+
+.colony-inventory h2 {
+  background-color: #365840; /* muted green */
+}
+
+button#submission-button {
+  background-color: #dd3ff2;
+  color: #1b1522;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  margin-top: auto;
+  align-self: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+
+button#submission-button:hover {
+  background-color: #f29eff;
+  color: #1b1522;
+}
+
+#btn {
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   
-  button#submission-button {
-    background-color: deeppink;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.25rem;
-    margin-top: 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-  }
-  
-  footer {
-    text-align: center;
-    font-size: 0.9rem;
-    padding: 1rem;
-    margin-top: 3rem;
-    color: #333;
-  }
+  align-self: center;
+}
+
+/* #submission-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: 200px;
+  align-self: center;
+} */
+
+#cartDetails p {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #9edaf3;
+}
+
+input[type="radio"] {
+  accent-color: #d1d85c; /* neon green */
+}

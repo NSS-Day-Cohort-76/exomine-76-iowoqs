@@ -1,3 +1,4 @@
+
 const colonyState = {
     colonyId: 0,
     mineralId: 0,
@@ -12,6 +13,7 @@ const facilityState = {
 
 export const setFacility = (facilityId) => {
     facilityState.facilityId = facilityId
+
 }
 
 export const setColony = (colonyId) => {

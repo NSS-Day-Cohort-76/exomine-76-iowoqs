@@ -222,7 +222,7 @@
     {
       "colonyId": 3,
       "mineralId": 1,
-      "quantity": 1,
+      "quantity": 3,
       "id": 17
     },
     {
@@ -243,7 +243,7 @@
       "id": 2,
       "facilityId": 2,
       "mineralId": 1,
-      "quantity": 117
+      "quantity": 115
     },
     {
       "id": 3,
