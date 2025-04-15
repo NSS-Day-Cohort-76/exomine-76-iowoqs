@@ -151,7 +151,7 @@
       "id": 5,
       "colonyId": 1,
       "mineralId": 3,
-      "quantity": 5
+      "quantity": 6
     },
     {
       "colonyId": 3,
@@ -162,13 +162,13 @@
     {
       "colonyId": 3,
       "mineralId": 4,
-      "quantity": 1,
+      "quantity": 2,
       "id": 7
     },
     {
       "colonyId": 2,
       "mineralId": 4,
-      "quantity": 3,
+      "quantity": 4,
       "id": 8
     },
     {
@@ -182,6 +182,54 @@
       "mineralId": 2,
       "quantity": 1,
       "id": 10
+    },
+    {
+      "colonyId": 2,
+      "mineralId": 5,
+      "quantity": 1,
+      "id": 11
+    },
+    {
+      "colonyId": 2,
+      "mineralId": 3,
+      "quantity": 1,
+      "id": 12
+    },
+    {
+      "colonyId": 2,
+      "mineralId": 2,
+      "quantity": 2,
+      "id": 13
+    },
+    {
+      "colonyId": 4,
+      "mineralId": 4,
+      "quantity": 1,
+      "id": 14
+    },
+    {
+      "colonyId": 0,
+      "mineralId": 1,
+      "quantity": 1,
+      "id": 15
+    },
+    {
+      "colonyId": 3,
+      "mineralId": 3,
+      "quantity": 1,
+      "id": 16
+    },
+    {
+      "colonyId": 3,
+      "mineralId": 1,
+      "quantity": 1,
+      "id": 17
+    },
+    {
+      "colonyId": 1,
+      "mineralId": 4,
+      "quantity": 1,
+      "id": 18
     }
   ],
   "facilityMinerals": [
@@ -189,31 +237,31 @@
       "id": 1,
       "facilityId": 3,
       "mineralId": 4,
-      "quantity": 91
+      "quantity": 87
     },
     {
       "id": 2,
       "facilityId": 2,
       "mineralId": 1,
-      "quantity": 119
+      "quantity": 117
     },
     {
       "id": 3,
       "facilityId": 1,
       "mineralId": 3,
-      "quantity": 60
+      "quantity": 58
     },
     {
       "id": 4,
       "facilityId": 4,
       "mineralId": 2,
-      "quantity": 146
+      "quantity": 144
     },
     {
       "id": 5,
       "facilityId": 5,
       "mineralId": 5,
-      "quantity": 79
+      "quantity": 78
     },
     {
       "id": 6,
@@ -243,7 +291,7 @@
       "id": 10,
       "facilityId": 5,
       "mineralId": 3,
-      "quantity": 99
+      "quantity": 98
     }
   ]
 }

@@ -1,9 +1,12 @@
 import { setColony } from "./TransientState.js"
 
+const governors = await fetch("http://localhost:8088/governors").then(res => res.json())
+
 const handleChange = (changeEvent) => {
     if (changeEvent.target.id === "governors") {
         const chosenOption = parseInt(changeEvent.target.value)
-        setColony(chosenOption)
+        const colonyIdObj = governors.find(obj => obj.id === chosenOption)
+        setColony(colonyIdObj.colonyId)
         }
     }
 
