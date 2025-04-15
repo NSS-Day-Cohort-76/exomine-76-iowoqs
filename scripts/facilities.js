@@ -12,15 +12,18 @@ export const displayFacility = async () => {
     const response = await fetch("http://localhost:8088/facilities")
     const facilities = await response.json()
    
-    let facilityChoiceHTML = `<select id="facility" class="facility-dropdown">
-        <option value="0">Choose a facility...</option>`
+    let facilityChoiceHTML = 
+        `<div class="dropdown-wrapper">
+            <label for="facility">Choose a Facility</label>
+            <select id="facility" class="facility-dropdown">
+            <option value="0">Choose a facility...</option>`
 
     const facilityOptions = facilities
         .filter(facility => facility.status === true)
         .map(facility => `<option value="${facility.id}">${facility.name}</option>`)
 
     facilityChoiceHTML += facilityOptions.join("")
-    facilityChoiceHTML += `</select>`
+    facilityChoiceHTML += `</select></div>`
 
     return facilityChoiceHTML
 }

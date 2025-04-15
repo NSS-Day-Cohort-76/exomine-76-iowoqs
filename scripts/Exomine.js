@@ -14,6 +14,11 @@ export const mainHTML = async () => {
     const buttonHTML = submissionButton()
 
     let html = `
+    <header class="main-header">
+    <img src="./images/planet.png" class="logo" alt="Planet Logo" />
+    <h1 class="title">Solar System Mining Market</h1>
+  </header>
+
     <section class="top-half">
       <div class="dropdowns">
         ${governorsDropdownHTML}
