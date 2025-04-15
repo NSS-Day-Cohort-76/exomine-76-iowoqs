@@ -10,16 +10,19 @@ const handleFacilityChoice = (changeEvent) => {
 export const displayFacility = async () => {
     const response = await fetch("http://localhost:8088/facilities")
     const facilities = await response.json()
+   
+    let facilityChoiceHTML = 
+        `<div class="dropdown-wrapper">
+            <label for="facility">Choose a Facility</label>
+            <select id="facility" class="facility-dropdown">
+            <option value="0">Choose a facility...</option>`
 
-    let facilityChoiceHTML = `<select id="facility" class="facility-dropdown">
-        <option value="0">Please select facility</option>`
+    const facilityOptions = facilities
+        .filter(facility => facility.status === true)
+        .map(facility => `<option value="${facility.id}">${facility.name}</option>`)
 
-    for (const facility of facilities) {
-        if (facility.status === true) {
-            facilityChoiceHTML += `<option value="${facility.id}">${facility.name}</option>`
-        }
-    }
+    facilityChoiceHTML += facilityOptions.join("")
+    facilityChoiceHTML += `</select></div>`
 
-    facilityChoiceHTML += `</select>`
     return facilityChoiceHTML
 }
