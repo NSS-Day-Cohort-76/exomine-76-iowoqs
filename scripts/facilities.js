@@ -15,7 +15,7 @@ export const displayFacility = async () => {
     let facilityChoiceHTML = 
         `<div class="dropdown-wrapper">
             <label for="facility">Choose a Facility</label>
-            <select id="facility" class="facility-dropdown">
+            <select id="facility" class="facility-dropdown" disabled>
             <option value="0">Choose a facility...</option>`
 
     const facilityOptions = facilities
@@ -30,6 +30,14 @@ export const displayFacility = async () => {
 
 
 export const facilitiesEventListener = () => {
+     // Listen for governor selection
+     document.addEventListener("governorSelected", () => {
+        const facilityDropdown = document.getElementById("facility")
+        if (facilityDropdown) {
+            facilityDropdown.disabled = false
+        }
+    })
+    
     document.addEventListener("change", (changeEvt) => {
         if (changeEvt.target.id === "facility") {
             document.dispatchEvent(new CustomEvent ("facilitySelected"))
