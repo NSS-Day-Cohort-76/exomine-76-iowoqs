@@ -64,7 +64,15 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
-.facility-minerals,
+.facility-minerals {
+  background-color: #2e2639;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  width: 85%;
+  /* box-shadow: 2px 2px 6px rgba(0,0,0,0.4); */
+  min-height: 250px;
+}
+
 .space-cart,
 .colony-inventory {
   background-color: #2e2639;
@@ -109,13 +117,22 @@ button#submission-button:hover {
   color: #1b1522;
 }
 
-#submission-button {
+#btn {
+  margin-top: 200px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-top: auto;
+  
   align-self: center;
 }
+
+/* #submission-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: 200px;
+  align-self: center;
+} */
 
 #cartDetails p {
   margin-top: 1rem;
