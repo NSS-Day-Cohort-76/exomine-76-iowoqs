@@ -1,7 +1,7 @@
 import { setMineral } from "./TransientState.js"
 
-export const MineralChoices = async () => {
-    const [mineralsRes, facilityMineralsRes, facilitiesRes] = await Promise.all([
+export const renderMinerals = async () => {
+    const [mineralsRes, facilityMineralsRes, facilities] = await Promise.all([
         fetch("http://localhost:8088/minerals"),
         fetch("http://localhost:8088/facilityMinerals"),
         fetch("http://localhost:8088/facilities")
@@ -9,32 +9,31 @@ export const MineralChoices = async () => {
 
     const minerals = await mineralsRes.json()
     const facilityMinerals = await facilityMineralsRes.json()
-    const facilities = await facilitiesRes.json()
+    const facilityObjects = await facilities.json()
 
     const selectedFacilityId = parseInt(document.querySelector("#facility").value)
-    const availableMinerals = facilityMinerals.filter(fm => fm.facilityId === selectedFacilityId)
+    const availableMineralsAtFacility = facilityMinerals.filter(
+        facilityMinerals => facilityMinerals.facilityId === selectedFacilityId
+    )
 
     let mineralChoiceHTML = `<div id="facilityMinerals" class="facility-minerals">`
-
-    for (const fm of availableMinerals) {
-        const mineral = minerals.find(m => m.id === fm.mineralId)
-        if (mineral) {
-            mineralChoiceHTML += `<input type="radio" name="mineral" value="${mineral.id}" /> ${fm.quantity} tons of ${mineral.name} <br />`
-        }
+    for (const facilityMinerals of availableMineralsAtFacility) {
+        const mineral = minerals.find(mineral => mineral.id === facilityMinerals.mineralId)
+        mineralChoiceHTML += `<input type="radio" name="mineral" value="${mineral.id}" /> ${facilityMinerals.quantity} tons of ${mineral.name} <br />`
     }
-
     mineralChoiceHTML += `</div>`
+    
+    const facilityEl = document.getElementById("facility")
 
-    const facilityObj = facilities.find(f => f.id === selectedFacilityId)
-    if (facilityObj) {
-        document.getElementById("facilityMineralHeading").innerHTML = `Facility Minerals for ${facilityObj.name}`
-    }
-
+    if (facilityEl.value !== "0" ) {
+        const facilityObject = facilityObjects.find(obj => obj.id === selectedFacilityId)
+        document.getElementById("facilityMineralHeading").innerHTML = `Facility Minerals for ${facilityObject.name}`
         document.querySelector("#mineralsForm").innerHTML = mineralChoiceHTML
     }
+}
 
-
-document.addEventListener("purchaseSubmitted", MineralChoices)
+document.addEventListener("facilitySelected", renderMinerals)
+document.addEventListener("purchaseSubmitted", renderMinerals)
 
 document.addEventListener("change", (event) => {
     // Only run if a mineral radio button was selected

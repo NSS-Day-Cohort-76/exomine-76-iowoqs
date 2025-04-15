@@ -1,17 +1,17 @@
 import { displayGovernors } from "./governors.js";
-import { displayColonyInventory } from "./colonyInventory.js";
 import { displayFacility } from "./facilities.js";
-import { MineralChoices } from "./FacilityMinerals.js";
 import { submissionButton } from "./spaceCart.js";
+import { renderMinerals } from "./FacilityMinerals.js";
+import { displayColonyInventory } from "./colonyInventory.js";
 
 
 export const mainHTML = async () => {
 
     const governorsDropdownHTML = await displayGovernors()
     const facilityDropdownHTML = await displayFacility()
-    const colonyInventoryHTML = await displayColonyInventory()
-    const facilityMineralsHTML = await MineralChoices()
     const buttonHTML = submissionButton()
+    const mineralHTML = renderMinerals()
+    const colonyInventoryHTML = displayColonyInventory()
 
     let html = `
     <header class="main-header">
@@ -44,7 +44,7 @@ export const mainHTML = async () => {
         <div id="cartDetails">
 
         </div>
-        <div>
+        <div id="btn">
         ${buttonHTML}
         </div>
       </div>
