@@ -1,106 +1,75 @@
-const transientState = {
-    facilityId: 0,
-    governorId: 0,
+
+const colonyState = {
+    colonyId: 0,
     mineralId: 0,
-}
-const newTransientState = {  
-    facilityMineralId: 0,
-    colonyInventoryId: 0
+    quantity: 0
 }
 
-export const setFacility = (id) => {
-    transientState.facilityId = id
-    document.dispatchEvent(new CustomEvent("stateChanged"))
+const facilityState = {
+    facilityId: 0,
+    mineralId: 0,
+    quantity: 0
 }
-export const setGovernor = (id) => {
-    transientState.governorId = id
-    document.dispatchEvent(new CustomEvent("stateChanged"))
+
+export const setFacility = (facilityId) => {
+    facilityState.facilityId = facilityId
+
 }
-export const setMineral = (id) => {
-    transientState.mineralId = id
-    document.dispatchEvent(new CustomEvent("stateChanged"))
-  }
+
+export const setColony = (colonyId) => {
+    colonyState.colonyId = colonyId
+}
+
+export const setMineral = (mineralId) => {
+    colonyState.mineralId = mineralId
+    facilityState.mineralId = mineralId
+}
+
+export const purchaseMineral = async () => {
+    // Get colonyMineral if it exists
+    const colonyRes = await fetch(`http://localhost:8088/colonyMinerals?mineralId=${colonyState.mineralId}&colonyId=${colonyState.colonyId}`)
+    const colonyMineralArray = await colonyRes.json()
+    
+    let colonyMineral
+    if (colonyMineralArray.length === 0) {
+        // New entry
+        colonyMineral = {
+            colonyId: colonyState.colonyId,
+            mineralId: colonyState.mineralId,
+            quantity: 1
+        }
+
+        await fetch("http://localhost:8088/colonyMinerals", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(colonyMineral)
+        })
+    } else {
+        // Update existing
+        colonyMineral = colonyMineralArray[0]
+        colonyMineral.quantity += 1
+
+        await fetch(`http://localhost:8088/colonyMinerals/${colonyMineral.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(colonyMineral)
+        })
+    }
+
+    //Fetch and update facility mineral
+    const facilityRes = await fetch(`http://localhost:8088/facilityMinerals?mineralId=${facilityState.mineralId}&facilityId=${facilityState.facilityId}`)
+    const facilityMineralArray = await facilityRes.json()
 
 
+    const facilityMineral = facilityMineralArray[0]
+    facilityMineral.quantity -= 1
+
+    await fetch(`http://localhost:8088/facilityMinerals/${facilityMineral.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(facilityMineral)
+    })
 
 
-
-
-
-
-
-
-
-// export const purchaseMineral = () => {
-    /*
-        Does the chosen governor's colony already own some of this mineral?
-            - If yes, what should happen?
-            - If no, what should happen?
-
-        Defining the algorithm for this method is traditionally the hardest
-        task for teams during this group project. It will determine when you
-        should use the method of POST, and when you should use PUT.
-
-        Only the foolhardy try to solve this problem with code.
-    */
-
-
-
-  
-
-
-
-
-
-
-
-// const transientState = {
-//     governorId: 0,
-//     facilityId: 0,
-//     mineralId: 0
-//   }
-  
-//   // SETTERS
-  
-//   export const setGovernor = (id) => {
-//     transientState.governorId = id
-//     // document.dispatchEvent(new CustomEvent("stateChanged"))
-//   }
-  
-//   export const setFacility = (id => {
-//     transientState.facilityId = id
-//     // document.dispatchEvent(new CustomEvent("stateChanged"))
-//   }
-  
-//   export const setMineral = (id) => {
-//     transientState.mineralId = id
-    // document.dispatchEvent(new CustomEvent("stateChanged"))
-//   }
-
-  // GETTER
-  
-//   export const getTransientState = () => {
-//     return { ...transientState } // safe copy right heeeere
-//   }
-  
-  // RESET
-  
-//   export const resetTransientState = () => {
-//     transientState.mineralId = 0
-//     document.dispatchEvent(new CustomEvent("stateChanged"))
-//   }
-
-
-//main.js  // example of function that keeps on keepin on injecting with each new update
-//   const renderApp = async () => {
-//     document.querySelector("#mineralsForm").innerHTML = FacilityMinerals()
-//   }
-  
-//   document.addEventListener("stateChanged", renderApp)
-
-// FacilityMinerals.js//
-//   document.addEventListener("change", (event) => {
-//     if (event.target.name === "mineral") {
-//       setMineral(parseInt(event.target.value))
-//     }
-//   })
+    document.dispatchEvent(new CustomEvent("purchaseSubmitted"))
+}

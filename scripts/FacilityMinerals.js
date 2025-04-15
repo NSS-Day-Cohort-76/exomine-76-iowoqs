@@ -1,4 +1,4 @@
-
+import { setMineral } from "./TransientState.js"
 
 export const MineralChoices = async () => {
     document.addEventListener("facilitySelected", async () => {
@@ -42,13 +42,7 @@ export const MineralChoices = async () => {
     })
 
 }
-
-
-
-// document.querySelector("#facility").addEventListener("change", async () => {
-//     const mineralHTML = await MineralChoices()
-//     document.querySelector("#mineralsForm").innerHTML = mineralHTML
-// })
+document.addEventListener("purchaseSubmitted", MineralChoices)
 
 document.addEventListener("change", (event) => {
     // Only run if a mineral radio button was selected
@@ -68,17 +62,8 @@ document.addEventListener("change", (event) => {
                 // Now update the cart with the message
                 const cartMessage = `1 ton of ${selectedMineral.name} from ${selectedFacilityName}`
                 document.querySelector("#cartDetails").innerHTML = `<p>${cartMessage}</p>`
+                setMineral(selectedMineral.id)
             })
     }
 })
 
-// document.querySelector("#purchaseBtn").addEventListener("click", () => {
-//     // Reset cart message
-//     document.querySelector("#cartDetails").innerHTML = `<p>No mineral selected</p>`
-
-//     // Uncheck all radio buttons
-//     const checkedRadio = document.querySelector('input[name="mineral"]:checked')
-//     if (checkedRadio) {
-//         checkedRadio.checked = false
-//     }
-// })

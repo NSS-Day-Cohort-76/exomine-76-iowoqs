@@ -2,6 +2,7 @@ import { displayGovernors } from "./governors.js";
 import { displayColonyInventory } from "./colonyInventory.js";
 import { displayFacility } from "./facilities.js";
 import { MineralChoices } from "./FacilityMinerals.js";
+import { submissionButton } from "./spaceCart.js";
 
 
 export const mainHTML = async () => {
@@ -10,8 +11,14 @@ export const mainHTML = async () => {
     const facilityDropdownHTML = await displayFacility()
     const colonyInventoryHTML = await displayColonyInventory()
     const facilityMineralsHTML = await MineralChoices()
+    const buttonHTML = submissionButton()
 
     let html = `
+    <header class="main-header">
+    <img src="./images/planet.png" class="logo" alt="Planet Logo" />
+    <h1 class="title">Solar System Mining Market</h1>
+  </header>
+
     <section class="top-half">
       <div class="dropdowns">
         ${governorsDropdownHTML}
@@ -20,7 +27,7 @@ export const mainHTML = async () => {
 
       <div id="colonyInventory" class="colony-inventory">
         <h2>Colony Minerals</h2>
-        ${colonyInventoryHTML}
+        
         <ul id="colonyInventoryList"></ul>
       </div>
 
@@ -36,11 +43,14 @@ export const mainHTML = async () => {
       <div id="spaceCart" class="space-cart">
         <h2>Space Cart</h2>
         <div id="cartDetails">
-          <p>No mineral selected</p>
+
         </div>
-        <button id="purchaseBtn">Purchase Minerals</button>
+        <div>
+        ${buttonHTML}
+        </div>
       </div>
     </section>`
 
     return html
 }
+

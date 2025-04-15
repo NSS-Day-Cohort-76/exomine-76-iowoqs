@@ -2,8 +2,16 @@ import { purchaseMineral } from "./TransientState.js"
 
 const handlePurchaseSubmission = (clickEvent) => {
     if (clickEvent.target.id === "submission-button") {
-        console.log("Button clicked!")
         purchaseMineral()
+        
+        //Reset Cart
+        document.querySelector("#cartDetails").innerHTML = `<p>No mineral selected</p>`
+        
+        // Uncheck all radio buttons
+        const checkedRadio = document.querySelector('input[name="mineral"]:checked')
+        if (checkedRadio) {
+            checkedRadio.checked = false
+        }
     }
 }
 
