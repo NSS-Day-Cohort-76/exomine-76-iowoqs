@@ -21,7 +21,9 @@ export const displayGovernors = async () => {
           <option value="none">Choose a governor...</option> 
     `
       const governorString = governors.map(obj => `
-        <option value="${obj.id}">${obj.name}</option>`)
+        <option value="${obj.id}" ${obj.status === false ? "disabled" : ""}>
+        ${obj.name} (${obj.status ? "Active" : "Inactive"})
+        </option>`)
         
         html += governorString.join("")
         html += `</select></div>`
